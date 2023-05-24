@@ -13,6 +13,46 @@ app.use(cors({
     optionsSuccessStatus: 200,  // 응답 상태 200으로 설정
   }))
 
+  app.options("/api/getdefaultdata", (req, res) => {
+    res.header("Access-Control-Allow-Origin", "https://2023-seoul-data-contest.vercel.app");
+    res.header("Access-Control-Allow-Methods", "GET, POST");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  
+    // Additional CORS headers can be added here if needed
+  
+    res.sendStatus(200);
+  });
+
+  app.options("/api/getdefaultCompanydata", (req, res) => {
+    res.header("Access-Control-Allow-Origin", "https://2023-seoul-data-contest.vercel.app");
+    res.header("Access-Control-Allow-Methods", "GET, POST");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  
+    // Additional CORS headers can be added here if needed
+  
+    res.sendStatus(200);
+  });
+
+  app.options("/api/getspecificdata", (req, res) => {
+    res.header("Access-Control-Allow-Origin", "https://2023-seoul-data-contest.vercel.app");
+    res.header("Access-Control-Allow-Methods", "GET, POST");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  
+    // Additional CORS headers can be added here if needed
+  
+    res.sendStatus(200);
+  });
+
+  app.options("/api/getdefaultCompanydata", (req, res) => {
+    res.header("Access-Control-Allow-Origin", "https://2023-seoul-data-contest.vercel.app");
+    res.header("Access-Control-Allow-Methods", "GET, POST");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  
+    // Additional CORS headers can be added here if needed
+  
+    res.sendStatus(200);
+  });
+
   // MySQL 연결
 const db = mysql.createPool({
     host: "toolrentaloffice.coqcexjiecvx.us-east-1.rds.amazonaws.com", // 호스트
