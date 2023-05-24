@@ -81,7 +81,7 @@ app.post("/api/getspecificdata", (req, res) => {
       if(selectMiddleCategory == '0') {
        
         if(selectMainCategory == 0) {
-          let sqlQuery = "SELECT * FROM RentalToolList ORDER BY `GONGUSEQ`";
+          let sqlQuery = "SELECT OPENWEEKHOUR, GONGUSEQ, CLOSEWEEKHOUR, GONGUNAME, MAINGONGUNAME, SUBGONGUNAME, PLACENAME, TELEPHONE, COST, GONGUCOUNT FROM RentalToolList ORDER BY GONGUSEQ";
   
           console.log("Executing SQL query:", sqlQuery, queryValues);
           db.query(sqlQuery, (err, result) => {
@@ -94,7 +94,7 @@ app.post("/api/getspecificdata", (req, res) => {
           });
         }
         else {
-          let sqlQuery = "SELECT * FROM RentalToolList WHERE `MAINGONGUCODE` = ? ORDER BY `GONGUSEQ`";
+          let sqlQuery = "SELECT OPENWEEKHOUR, GONGUSEQ, CLOSEWEEKHOUR, GONGUNAME, MAINGONGUNAME, SUBGONGUNAME, PLACENAME, TELEPHONE, COST, GONGUCOUNT WHERE `MAINGONGUCODE` = ? ORDER BY `GONGUSEQ`";
   
           console.log("Executing SQL query:", sqlQuery, queryValues);
           db.query(sqlQuery, queryValues, (err, result) => {
