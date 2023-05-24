@@ -8,7 +8,7 @@ app.use(bodyParser.json()); // JSON 형식의 요청 본문 처리
 app.use(bodyParser.urlencoded({ extended: true })); // URL 인코딩된 요청 본문 처리
 
 app.use(cors({
-    origin: "https://2023-seoul-data-contest.vercel.app",                // 출처 허용 옵션
+    origin: "*",                // 출처 허용 옵션
     credentials: true,          // 응답 헤더에 Access-Control-Allow-Credentials 추가
     optionsSuccessStatus: 200,  // 응답 상태 200으로 설정
   }))
