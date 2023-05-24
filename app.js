@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json()); // JSON 형식의 요청 본문 처리
 app.use(bodyParser.urlencoded({ extended: true })); // URL 인코딩된 요청 본문 처리
 
-// MySQL 연결
+// MySQL 연결 
 const db = mysql.createPool({
   host: "toolrentaloffice.coqcexjiecvx.us-east-1.rds.amazonaws.com", // 호스트
   user: "stakeholders",      // 데이터베이스 계정
@@ -33,7 +33,7 @@ app.get('/', (request, response) => {
 // post 요청 시 값을 객체로 바꿔줌
 //app.use(express.urlencoded({ extended: true })) 
 
-
+//오류가 나서 확인하니 크기제한이있었음-> 바로 vercel.json 크기 10mb제한설정해버림
 app.get("/api/getdefaultdata", (req, res) => {
 
   const sqlQuery = "SELECT * FROM RentalToolList ORDER BY `GONGUSEQ`";
