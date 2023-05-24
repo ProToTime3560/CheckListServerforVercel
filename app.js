@@ -8,7 +8,7 @@ app.use(bodyParser.json()); // JSON 형식의 요청 본문 처리
 app.use(bodyParser.urlencoded({ extended: true })); // URL 인코딩된 요청 본문 처리
 
 // 요청 크기 제한 설정
-app.use(express.json({ limit: '20mb' }));
+app.use(express.json({ limit: '50mb' }));
 
 // MySQL 연결 
 const db = mysql.createPool({
@@ -39,7 +39,7 @@ app.get('/', (request, response) => {
 //오류가 나서 확인하니 크기제한이있었음-> 바로 vercel.json 크기 10mb제한설정해버림
 app.get("/api/getdefaultdata", (req, res) => {
 
-  const sqlQuery = "SELECT * FROM RentalToolList ORDER BY `GONGUSEQ`";
+  const sqlQuery = "SELECT GONGUSEQ,MAINGONGUCODE,MAINGONGUNAME,SUBGONGUCODE,SUBGONGUNAME,GONGUNAME,RENTALCOSTTYPE,COST,RENTALCOST,GONGUCOUNT,MAPSEQ,PLACENAME,DETAILADDR,TELEPHONE,OPENWEEKHOUR,CLOSEWEEKHOUR FROM RentalToolList ORDER BY `GONGUSEQ`";
 
   db.query(sqlQuery, (err, result) => {
     console.log('접속중');
