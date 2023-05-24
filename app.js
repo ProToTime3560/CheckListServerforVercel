@@ -8,56 +8,14 @@ app.use(bodyParser.json()); // JSON 형식의 요청 본문 처리
 app.use(bodyParser.urlencoded({ extended: true })); // URL 인코딩된 요청 본문 처리
 
 app.use(cors({
-    origin: "https://2023-seoul-data-contest.vercel.app",                // 출처 허용 옵션
-    credentials: true,          // 응답 헤더에 Access-Control-Allow-Credentials 추가
-    optionsSuccessStatus: 200,  // 응답 상태 200으로 설정
+    origin: "*",                // 출처 허용 옵션
   }))
-
-  app.options("/api/getdefaultdata", (req, res) => {
-    res.header("Access-Control-Allow-Origin", "https://2023-seoul-data-contest.vercel.app");
-    res.header("Access-Control-Allow-Methods", "GET, POST");
-    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  
-    // Additional CORS headers can be added here if needed
-  
-    res.sendStatus(200);
-  });
-
-  app.options("/api/getdefaultCompanydata", (req, res) => {
-    res.header("Access-Control-Allow-Origin", "https://2023-seoul-data-contest.vercel.app");
-    res.header("Access-Control-Allow-Methods", "GET, POST");
-    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  
-    // Additional CORS headers can be added here if needed
-  
-    res.sendStatus(200);
-  });
-
-  app.options("/api/getspecificdata", (req, res) => {
-    res.header("Access-Control-Allow-Origin", "https://2023-seoul-data-contest.vercel.app");
-    res.header("Access-Control-Allow-Methods", "GET, POST");
-    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  
-    // Additional CORS headers can be added here if needed
-  
-    res.sendStatus(200);
-  });
-
-  app.options("/api/getdefaultCompanydata", (req, res) => {
-    res.header("Access-Control-Allow-Origin", "https://2023-seoul-data-contest.vercel.app");
-    res.header("Access-Control-Allow-Methods", "GET, POST");
-    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  
-    // Additional CORS headers can be added here if needed
-  
-    res.sendStatus(200);
-  });
 
   // MySQL 연결
 const db = mysql.createPool({
     host: "toolrentaloffice.coqcexjiecvx.us-east-1.rds.amazonaws.com", // 호스트
-    user: "*****",      // 데이터베이스 계정
-    password: "*****",      // 데이터베이스 비밀번호 가려놓음
+    user: "stakeholders",      // 데이터베이스 계정
+    password: "stakeholders",      // 데이터베이스 비밀번호 가려놓음
     database: "ToolRentalOffice",  // 사용할 데이터베이스
   });
 
@@ -75,8 +33,7 @@ app.listen(PORT, () => {
   })
 
   app.get("/api/getdefaultdata", (req, res) => {
-    res.header("Access-Control-Allow-Origin", "https://2023-seoul-data-contest.vercel.app"); /*외부 도메인으로 부터 HTTP 요청 허용*/
-    //console.log('디폴트접속성공');
+  
     const sqlQuery = "SELECT * FROM RentalToolList ORDER BY GONGUSEQ";
   
     db.query(sqlQuery, (err, result) => {
@@ -89,8 +46,7 @@ app.listen(PORT, () => {
   });
   
   app.get("/api/getdefaultCompanydata", (req, res) => {
-    res.header("Access-Control-Allow-Origin", "https://2023-seoul-data-contest.vercel.app"); /*외부 도메인으로 부터 HTTP 요청 허용*/
-    //console.log('디폴트접속성공');
+  
     const sqlQuery = "SELECT * FROM ConstructionCompany ORDER BY ENT_AREA";
   
     db.query(sqlQuery, (err, result) => {
@@ -104,7 +60,6 @@ app.listen(PORT, () => {
   
   
   app.post("/api/getspecificdata", (req, res) => {
-    res.header("Access-Control-Allow-Origin", "https://2023-seoul-data-contest.vercel.app");
     
     let selectRegion = req.body.Region;
     let selectMainCategory = req.body.MainCategory;
@@ -797,7 +752,6 @@ app.listen(PORT, () => {
   });
   
   app.post("/api/getdefaultCompanydata", (req, res) => {
-    res.header("Access-Control-Allow-Origin", "https://2023-seoul-data-contest.vercel.app");
     
     let selectRegion = req.body.Region;
     let searchArray = req.body.searchArray;
@@ -863,8 +817,9 @@ app.listen(PORT, () => {
                 res.send(result);
               }
             });
-        }
+          }
     }
-});
+    
+  });
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
