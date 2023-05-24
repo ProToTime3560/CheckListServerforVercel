@@ -39,7 +39,7 @@ app.get('/', (request, response) => {
 //오류가 나서 확인하니 크기제한이있었음-> 바로 vercel.json 크기 10mb제한설정해버림
 app.get("/api/getdefaultdata", (req, res) => {
 
-  const sqlQuery = "SELECT GONGUSEQ,MAINGONGUCODE,MAINGONGUNAME,SUBGONGUCODE,SUBGONGUNAME,GONGUNAME,RENTALCOSTTYPE,COST FROM RentalToolList ORDER BY `GONGUSEQ`";
+  const sqlQuery = "SELECT OPENWEEKHOUR, GONGUSEQ, CLOSEWEEKHOUR, GONGUNAME, MAINGONGUNAME, SUBGONGUNAME, PLACENAME, TELEPHONE, COST, GONGUCOUNT FROM RentalToolList ORDER BY GONGUSEQ";
 
   db.query(sqlQuery, (err, result) => {
     console.log('접속중');
