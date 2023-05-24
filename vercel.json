@@ -8,8 +8,7 @@
     "routes": [
         {
           "src": "/(.*)",
-          "dest": "app.js",
-          "body": "10mb"
+          "dest": "app.js"
         }
     ]
   }

@@ -7,6 +7,9 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json()); // JSON 형식의 요청 본문 처리
 app.use(bodyParser.urlencoded({ extended: true })); // URL 인코딩된 요청 본문 처리
 
+// 요청 크기 제한 설정
+app.use(express.json({ limit: '20mb' }));
+
 // MySQL 연결 
 const db = mysql.createPool({
   host: "toolrentaloffice.coqcexjiecvx.us-east-1.rds.amazonaws.com", // 호스트
