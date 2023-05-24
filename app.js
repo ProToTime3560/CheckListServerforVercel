@@ -36,7 +36,7 @@ app.get('/', (request, response) => {
 
 app.get("/api/getdefaultdata", (req, res) => {
 
-  const sqlQuery = "SELECT * FROM RentalToolList ORDER BY GONGUSEQ";
+  const sqlQuery = "SELECT * FROM RentalToolList ORDER BY `GONGUSEQ`";
 
   db.query(sqlQuery, (err, result) => {
     console.log('접속중');
@@ -49,7 +49,7 @@ app.get("/api/getdefaultdata", (req, res) => {
 
 app.get("/api/getdefaultCompanydata", (req, res) => {
 
-  const sqlQuery = "SELECT * FROM ConstructionCompany ORDER BY ENT_AREA";
+  const sqlQuery = "SELECT * FROM ConstructionCompany ORDER BY `ENT_AREA`";
 
   db.query(sqlQuery, (err, result) => {
     console.log('접속중');
