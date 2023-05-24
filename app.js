@@ -78,7 +78,7 @@ app.post("/api/getspecificdata", (req, res) => {
       if(selectMiddleCategory == '0') {
        
         if(selectMainCategory == 0) {
-          let sqlQuery = "SELECT * FROM RentalToolList ORDER BY GONGUSEQ";
+          let sqlQuery = "SELECT * FROM RentalToolList ORDER BY `GONGUSEQ`";
   
           console.log("Executing SQL query:", sqlQuery, queryValues);
           db.query(sqlQuery, (err, result) => {
@@ -131,7 +131,7 @@ app.post("/api/getspecificdata", (req, res) => {
           sqlQuery = "SELECT * FROM RentalToolList WHERE (DETAILADDR LIKE '%강서구%' OR  (MAPSEQ >= 49 AND MAPSEQ <= 52) OR (MAPSEQ >= 2412 AND MAPSEQ <= 2436) OR MAPSEQ = 13219) ORDER BY `GONGUSEQ`;"
           break;
         case '강동구' :
-          sqlQuery = "SELECT * FROM RentalToolList WHERE (DETAILADDR LIKE '%강동구%' OR  ((GONGUSEQ >= 1 AND GONGUSEQ <= 35) OR (GONGUSEQ >= 115 AND GONGUSEQ <= 116) OR (GONGUSEQ >= 143 AND GONGUSEQ <= 144) OR GONGUSEQ = 148 OR GONGUSEQ = 151 OR GONGUSEQ = 153 OR GONGUSEQ = 156)) ORDER BY GONGUSEQ;"
+          sqlQuery = "SELECT * FROM RentalToolList WHERE (DETAILADDR LIKE '%강동구%' OR  ((GONGUSEQ >= 1 AND GONGUSEQ <= 35) OR (GONGUSEQ >= 115 AND GONGUSEQ <= 116) OR (GONGUSEQ >= 143 AND GONGUSEQ <= 144) OR GONGUSEQ = 148 OR GONGUSEQ = 151 OR GONGUSEQ = 153 OR GONGUSEQ = 156)) ORDER BY `GONGUSEQ`;"
           break;
         case '관악구' :
           sqlQuery = "SELECT * FROM RentalToolList WHERE (DETAILADDR LIKE '%관악구%' OR  (MAPSEQ >= 53 AND MAPSEQ <= 74) OR (MAPSEQ >= 203 AND MAPSEQ <= 223)) ORDER BY `GONGUSEQ`;"
@@ -200,7 +200,7 @@ app.post("/api/getspecificdata", (req, res) => {
           sqlQuery = "SELECT * FROM RentalToolList WHERE (DETAILADDR LIKE '%강남구%' OR (GONGUSEQ BETWEEN 13005 AND 13026)) ORDER BY `GONGUSEQ`;"
           break;
         case '인천광역시 강화군' :
-          sqlQuery = "SELECT * FROM RentalToolList WHERE (DETAILADDR LIKE '%인천광역시 강화군%' OR GONGUSEQ = 13064) ORDER BY GONGUSEQ;"
+          sqlQuery = "SELECT * FROM RentalToolList WHERE (DETAILADDR LIKE '%인천광역시 강화군%' OR GONGUSEQ = 13064) ORDER BY `GONGUSEQ`;"
           break;
       }
     
@@ -226,7 +226,7 @@ app.post("/api/getspecificdata", (req, res) => {
                 sqlQuery = "SELECT * FROM RentalToolList WHERE MAINGONGUCODE = ? AND (DETAILADDR LIKE '%강서구%' OR  (MAPSEQ >= 49 AND MAPSEQ <= 52) OR (MAPSEQ >= 2412 AND MAPSEQ <= 2436) OR MAPSEQ = 13219) ORDER BY `GONGUSEQ`;"
                 break;
               case '강동구' :
-                sqlQuery = "SELECT * FROM RentalToolList WHERE MAINGONGUCODE = ? AND (DETAILADDR LIKE '%강동구%' OR  ((GONGUSEQ >= 1 AND GONGUSEQ <= 35) OR (GONGUSEQ >= 115 AND GONGUSEQ <= 116) OR (GONGUSEQ >= 143 AND GONGUSEQ <= 144) OR GONGUSEQ = 148 OR GONGUSEQ = 151 OR GONGUSEQ = 153 OR GONGUSEQ = 156)) ORDER BY GONGUSEQ;"
+                sqlQuery = "SELECT * FROM RentalToolList WHERE MAINGONGUCODE = ? AND (DETAILADDR LIKE '%강동구%' OR  ((GONGUSEQ >= 1 AND GONGUSEQ <= 35) OR (GONGUSEQ >= 115 AND GONGUSEQ <= 116) OR (GONGUSEQ >= 143 AND GONGUSEQ <= 144) OR GONGUSEQ = 148 OR GONGUSEQ = 151 OR GONGUSEQ = 153 OR GONGUSEQ = 156)) ORDER BY `GONGUSEQ`;"
                 break;
               case '관악구' :
                 sqlQuery = "SELECT * FROM RentalToolList WHERE MAINGONGUCODE = ? AND (DETAILADDR LIKE '%관악구%' OR  (MAPSEQ >= 53 AND MAPSEQ <= 74) OR (MAPSEQ >= 203 AND MAPSEQ <= 223)) ORDER BY `GONGUSEQ`;"
@@ -295,7 +295,7 @@ app.post("/api/getspecificdata", (req, res) => {
                 sqlQuery = "SELECT * FROM RentalToolList WHERE MAINGONGUCODE = ? AND (DETAILADDR LIKE '%강남구%' OR (GONGUSEQ BETWEEN 13005 AND 13026)) ORDER BY `GONGUSEQ`;"
                 break;
               case '인천광역시 강화군' :
-                sqlQuery = "SELECT * FROM RentalToolList WHERE MAINGONGUCODE = ? AND (DETAILADDR LIKE '%인천광역시 강화군%' OR GONGUSEQ = 13064) ORDER BY GONGUSEQ;"
+                sqlQuery = "SELECT * FROM RentalToolList WHERE MAINGONGUCODE = ? AND (DETAILADDR LIKE '%인천광역시 강화군%' OR GONGUSEQ = 13064) ORDER BY `GONGUSEQ`;"
                 break;
             }
             
@@ -320,7 +320,7 @@ app.post("/api/getspecificdata", (req, res) => {
                 sqlQuery = "SELECT * FROM RentalToolList WHERE MAINGONGUCODE = ? AND SUBGONGUCODE = ? AND (DETAILADDR LIKE '%강서구%' OR  (MAPSEQ >= 49 AND MAPSEQ <= 52) OR (MAPSEQ >= 2412 AND MAPSEQ <= 2436) OR MAPSEQ = 13219) ORDER BY `GONGUSEQ`;"
                 break;
               case '강동구' :
-                sqlQuery = "SELECT * FROM RentalToolList WHERE MAINGONGUCODE = ? AND SUBGONGUCODE = ? AND (DETAILADDR LIKE '%강동구%' OR  ((GONGUSEQ >= 1 AND GONGUSEQ <= 35) OR (GONGUSEQ >= 115 AND GONGUSEQ <= 116) OR (GONGUSEQ >= 143 AND GONGUSEQ <= 144) OR GONGUSEQ = 148 OR GONGUSEQ = 151 OR GONGUSEQ = 153 OR GONGUSEQ = 156)) ORDER BY GONGUSEQ;"
+                sqlQuery = "SELECT * FROM RentalToolList WHERE MAINGONGUCODE = ? AND SUBGONGUCODE = ? AND (DETAILADDR LIKE '%강동구%' OR  ((GONGUSEQ >= 1 AND GONGUSEQ <= 35) OR (GONGUSEQ >= 115 AND GONGUSEQ <= 116) OR (GONGUSEQ >= 143 AND GONGUSEQ <= 144) OR GONGUSEQ = 148 OR GONGUSEQ = 151 OR GONGUSEQ = 153 OR GONGUSEQ = 156)) ORDER BY `GONGUSEQ`;"
                 break;
               case '관악구' :
                 sqlQuery = "SELECT * FROM RentalToolList WHERE MAINGONGUCODE = ? AND SUBGONGUCODE = ? AND (DETAILADDR LIKE '%관악구%' OR  (MAPSEQ >= 53 AND MAPSEQ <= 74) OR (MAPSEQ >= 203 AND MAPSEQ <= 223)) ORDER BY `GONGUSEQ`;"
@@ -418,7 +418,7 @@ app.post("/api/getspecificdata", (req, res) => {
       if(selectMiddleCategory == '0') {
        
         if(selectMainCategory == 0) {
-          let sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' ORDER BY GONGUSEQ";
+          let sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' ORDER BY `GONGUSEQ`";
   
           console.log("Executing SQL query:", sqlQuery, queryValues);
           db.query(sqlQuery, (err, result) => {
@@ -471,7 +471,7 @@ app.post("/api/getspecificdata", (req, res) => {
           sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%강서구%' OR  (MAPSEQ >= 49 AND MAPSEQ <= 52) OR (MAPSEQ >= 2412 AND MAPSEQ <= 2436) OR MAPSEQ = 13219) ORDER BY `GONGUSEQ`;"
           break;
         case '강동구' :
-          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%강동구%' OR  ((GONGUSEQ >= 1 AND GONGUSEQ <= 35) OR (GONGUSEQ >= 115 AND GONGUSEQ <= 116) OR (GONGUSEQ >= 143 AND GONGUSEQ <= 144) OR GONGUSEQ = 148 OR GONGUSEQ = 151 OR GONGUSEQ = 153 OR GONGUSEQ = 156)) ORDER BY GONGUSEQ;"
+          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%강동구%' OR  ((GONGUSEQ >= 1 AND GONGUSEQ <= 35) OR (GONGUSEQ >= 115 AND GONGUSEQ <= 116) OR (GONGUSEQ >= 143 AND GONGUSEQ <= 144) OR GONGUSEQ = 148 OR GONGUSEQ = 151 OR GONGUSEQ = 153 OR GONGUSEQ = 156)) ORDER BY `GONGUSEQ`;"
           break;
         case '관악구' :
           sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%관악구%' OR  (MAPSEQ >= 53 AND MAPSEQ <= 74) OR (MAPSEQ >= 203 AND MAPSEQ <= 223)) ORDER BY `GONGUSEQ`;"
@@ -540,7 +540,7 @@ app.post("/api/getspecificdata", (req, res) => {
           sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%강남구%' OR (GONGUSEQ BETWEEN 13005 AND 13026)) ORDER BY `GONGUSEQ`;"
           break;
         case '인천광역시 강화군' :
-          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%인천광역시 강화군%' OR GONGUSEQ = 13064) ORDER BY GONGUSEQ;"
+          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%인천광역시 강화군%' OR GONGUSEQ = 13064) ORDER BY `GONGUSEQ`;"
           break;
       }
     
@@ -566,7 +566,7 @@ app.post("/api/getspecificdata", (req, res) => {
                 sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND MAINGONGUCODE = ? AND (DETAILADDR LIKE '%강서구%' OR  (MAPSEQ >= 49 AND MAPSEQ <= 52) OR (MAPSEQ >= 2412 AND MAPSEQ <= 2436) OR MAPSEQ = 13219) ORDER BY `GONGUSEQ`;"
                 break;
               case '강동구' :
-                sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND MAINGONGUCODE = ? AND (DETAILADDR LIKE '%강동구%' OR  ((GONGUSEQ >= 1 AND GONGUSEQ <= 35) OR (GONGUSEQ >= 115 AND GONGUSEQ <= 116) OR (GONGUSEQ >= 143 AND GONGUSEQ <= 144) OR GONGUSEQ = 148 OR GONGUSEQ = 151 OR GONGUSEQ = 153 OR GONGUSEQ = 156)) ORDER BY GONGUSEQ;"
+                sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND MAINGONGUCODE = ? AND (DETAILADDR LIKE '%강동구%' OR  ((GONGUSEQ >= 1 AND GONGUSEQ <= 35) OR (GONGUSEQ >= 115 AND GONGUSEQ <= 116) OR (GONGUSEQ >= 143 AND GONGUSEQ <= 144) OR GONGUSEQ = 148 OR GONGUSEQ = 151 OR GONGUSEQ = 153 OR GONGUSEQ = 156)) ORDER BY `GONGUSEQ`;"
                 break;
               case '관악구' :
                 sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND MAINGONGUCODE = ? AND (DETAILADDR LIKE '%관악구%' OR  (MAPSEQ >= 53 AND MAPSEQ <= 74) OR (MAPSEQ >= 203 AND MAPSEQ <= 223)) ORDER BY `GONGUSEQ`;"
@@ -635,7 +635,7 @@ app.post("/api/getspecificdata", (req, res) => {
                 sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND MAINGONGUCODE = ? AND (DETAILADDR LIKE '%강남구%' OR (GONGUSEQ BETWEEN 13005 AND 13026)) ORDER BY `GONGUSEQ`;"
                 break;
               case '인천광역시 강화군' :
-                sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND MAINGONGUCODE = ? AND (DETAILADDR LIKE '%인천광역시 강화군%' OR GONGUSEQ = 13064) ORDER BY GONGUSEQ;"
+                sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND MAINGONGUCODE = ? AND (DETAILADDR LIKE '%인천광역시 강화군%' OR GONGUSEQ = 13064) ORDER BY `GONGUSEQ`;"
                 break;
             }
             
@@ -660,7 +660,7 @@ app.post("/api/getspecificdata", (req, res) => {
                 sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND MAINGONGUCODE = ? AND SUBGONGUCODE = ? AND (DETAILADDR LIKE '%강서구%' OR  (MAPSEQ >= 49 AND MAPSEQ <= 52) OR (MAPSEQ >= 2412 AND MAPSEQ <= 2436) OR MAPSEQ = 13219) ORDER BY `GONGUSEQ`;"
                 break;
               case '강동구' :
-                sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND MAINGONGUCODE = ? AND SUBGONGUCODE = ? AND (DETAILADDR LIKE '%강동구%' OR  ((GONGUSEQ >= 1 AND GONGUSEQ <= 35) OR (GONGUSEQ >= 115 AND GONGUSEQ <= 116) OR (GONGUSEQ >= 143 AND GONGUSEQ <= 144) OR GONGUSEQ = 148 OR GONGUSEQ = 151 OR GONGUSEQ = 153 OR GONGUSEQ = 156)) ORDER BY GONGUSEQ;"
+                sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND MAINGONGUCODE = ? AND SUBGONGUCODE = ? AND (DETAILADDR LIKE '%강동구%' OR  ((GONGUSEQ >= 1 AND GONGUSEQ <= 35) OR (GONGUSEQ >= 115 AND GONGUSEQ <= 116) OR (GONGUSEQ >= 143 AND GONGUSEQ <= 144) OR GONGUSEQ = 148 OR GONGUSEQ = 151 OR GONGUSEQ = 153 OR GONGUSEQ = 156)) ORDER BY `GONGUSEQ`;"
                 break;
               case '관악구' :
                 sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND MAINGONGUCODE = ? AND SUBGONGUCODE = ? AND (DETAILADDR LIKE '%관악구%' OR  (MAPSEQ >= 53 AND MAPSEQ <= 74) OR (MAPSEQ >= 203 AND MAPSEQ <= 223)) ORDER BY `GONGUSEQ`;"
@@ -765,7 +765,7 @@ app.post("/api/getdefaultCompanydata", (req, res) => {
       console.log("region 설정없음")
        
         if(selectRegion == "모든지역") {//모든지역 선택
-          let sqlQuery = "SELECT * FROM ConstructionCompany ORDER BY ENT_AREA";
+          let sqlQuery = "SELECT * FROM ConstructionCompany ORDER BY `ENT_AREA`";
   
           console.log("Executing SQL query:", sqlQuery);
           db.query(sqlQuery, (err, result) => {
@@ -798,7 +798,7 @@ app.post("/api/getdefaultCompanydata", (req, res) => {
     console.log("검색어가 있네")
     let makeListForMysql = searchArray.map((value) => `%${value}%`);
     if(selectRegion == "모든지역") { //모든지역 선택
-          let sqlQuery = "SELECT * FROM ConstructionCompany WHERE MAIN_CNSTRCT_FLD_NM LIKE '" + makeListForMysql.join("' OR MAIN_CNSTRCT_FLD_NM Like '") + "' ORDER BY ENT_AREA";
+          let sqlQuery = "SELECT * FROM ConstructionCompany WHERE MAIN_CNSTRCT_FLD_NM LIKE '" + makeListForMysql.join("' OR MAIN_CNSTRCT_FLD_NM Like '") + "' ORDER BY `ENT_AREA`";
           console.log("Executing SQL query:", sqlQuery, searchArray );
           db.query(sqlQuery, searchArray,(err, result) => {
             if (err) {
@@ -809,7 +809,7 @@ app.post("/api/getdefaultCompanydata", (req, res) => {
             }
           });
         } else { // 모든지역 아님
-          let sqlQuery = "SELECT * FROM ConstructionCompany WHERE MAIN_CNSTRCT_FLD_NM LIKE '" + makeListForMysql.join("' OR MAIN_CNSTRCT_FLD_NM Like '") + "'  AND `ENT_AREA` = ? ORDER BY ENT_AREA";
+          let sqlQuery = "SELECT * FROM ConstructionCompany WHERE MAIN_CNSTRCT_FLD_NM LIKE '" + makeListForMysql.join("' OR MAIN_CNSTRCT_FLD_NM Like '") + "'  AND `ENT_AREA` = ? ORDER BY `ENT_AREA`";
           console.log("Executing SQL query:", sqlQuery, selectRegion, searchArray);
           db.query(sqlQuery, searchArray ,  selectRegion, (err, result) => {
             if (err) {
