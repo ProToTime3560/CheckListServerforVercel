@@ -8,9 +8,7 @@ app.use(bodyParser.json()); // JSON 형식의 요청 본문 처리
 app.use(bodyParser.urlencoded({ extended: true })); // URL 인코딩된 요청 본문 처리
 
 app.use(cors({
-    origin: "*",                // 출처 허용 옵션
-    credentials: true,          // 응답 헤더에 Access-Control-Allow-Credentials 추가
-    optionsSuccessStatus: 200,  // 응답 상태 200으로 설정
+    origin: "*"                // 출처 허용 옵션
   }))
 
   // MySQL 연결
@@ -35,8 +33,7 @@ app.listen(PORT, () => {
   })
 
   app.get("/api/getdefaultdata", (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*"); /*외부 도메인으로 부터 HTTP 요청 허용*/
-    //console.log('디폴트접속성공');
+ 
     const sqlQuery = "SELECT * FROM RentalToolList ORDER BY GONGUSEQ";
   
     db.query(sqlQuery, (err, result) => {
@@ -49,8 +46,7 @@ app.listen(PORT, () => {
   });
   
   app.get("/api/getdefaultCompanydata", (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*"); /*외부 도메인으로 부터 HTTP 요청 허용*/
-    //console.log('디폴트접속성공');
+ 
     const sqlQuery = "SELECT * FROM ConstructionCompany ORDER BY ENT_AREA";
   
     db.query(sqlQuery, (err, result) => {
@@ -64,7 +60,6 @@ app.listen(PORT, () => {
   
   
   app.post("/api/getspecificdata", (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
     
     let selectRegion = req.body.Region;
     let selectMainCategory = req.body.MainCategory;
@@ -757,7 +752,6 @@ app.listen(PORT, () => {
   });
   
   app.post("/api/getdefaultCompanydata", (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
     
     let selectRegion = req.body.Region;
     let searchArray = req.body.searchArray;
