@@ -415,8 +415,8 @@ app.post("/api/getspecificdata", (req, res) => {
   }
   else{ //검색어가 있을경우------------------------------------------------ AND GONGUNAME LIKE '%${searchArray.join('%')}%' 추가됨
     console.log("검색어가 있다네")
-    gonguNames = makeListForMysql.map(gonguName => `GONGUNAME LIKE '%${gonguName}%'`).join(' OR ');
     let makeListForMysql = searchArray.map((value) => `%${value}%`);// 테스트
+    let gonguNames = makeListForMysql.map(gonguName => `GONGUNAME LIKE '%${gonguName}%'`).join(' OR ');
     if(selectRegion == "모든지역") { //모든지역 선택
       console.log("region 설정없음")
       if(selectMiddleCategory == '0') {
