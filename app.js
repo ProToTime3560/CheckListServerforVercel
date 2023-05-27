@@ -421,7 +421,7 @@ app.post("/api/getspecificdata", (req, res) => {
       if(selectMiddleCategory == '0') {
        
         if(selectMainCategory == 0) {
-          let sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' ORDER BY `GONGUSEQ`";
+          let sqlQuery = "SELECT GONGUSEQ,MAINGONGUCODE,MAINGONGUNAME,SUBGONGUCODE,SUBGONGUNAME,GONGUNAME,COST,GONGUCOUNT,MAPSEQ,PLACENAME,TELEPHONE,OPENWEEKHOUR,CLOSEWEEKHOUR FROM RentalToolList FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' ORDER BY `GONGUSEQ`";
   
           console.log("Executing SQL query:", sqlQuery, queryValues);
           db.query(sqlQuery, (err, result) => {
@@ -434,7 +434,7 @@ app.post("/api/getspecificdata", (req, res) => {
           });
         }
         else {
-          let sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND `MAINGONGUCODE` = ? ORDER BY `GONGUSEQ`";
+          let sqlQuery = "SELECT GONGUSEQ,MAINGONGUCODE,MAINGONGUNAME,SUBGONGUCODE,SUBGONGUNAME,GONGUNAME,COST,GONGUCOUNT,MAPSEQ,PLACENAME,TELEPHONE,OPENWEEKHOUR,CLOSEWEEKHOUR FROM RentalToolList FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND `MAINGONGUCODE` = ? ORDER BY `GONGUSEQ`";
   
           console.log("Executing SQL query:", sqlQuery, queryValues);
           db.query(sqlQuery, queryValues, (err, result) => {
