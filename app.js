@@ -415,7 +415,8 @@ app.post("/api/getspecificdata", (req, res) => {
   }
   else{ //검색어가 있을경우------------------------------------------------ AND GONGUNAME LIKE '%${searchArray.join('%')}%' 추가됨
     console.log("검색어가 있다네")
-    let makeListForMysql = searchArray.map((value) => `%${value}%`);
+    gonguNames = makeListForMysql.map(gonguName => `GONGUNAME LIKE '%${gonguName}%'`).join(' OR ');
+    let makeListForMysql = searchArray.map((value) => `%${value}%`);// 테스트
     if(selectRegion == "모든지역") { //모든지역 선택
       console.log("region 설정없음")
       if(selectMiddleCategory == '0') {
@@ -468,82 +469,82 @@ app.post("/api/getspecificdata", (req, res) => {
       console.log("대분류 선택안함")
       switch(selectRegion) {
         case '강북구':
-          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%강북구%' OR  (MAPSEQ >= 36 AND MAPSEQ <= 48) OR (MAPSEQ >= 194 AND MAPSEQ <= 202) OR MAPSEQ = 13034 OR (MAPSEQ >= 13215 AND MAPSEQ <= 13216) OR MAPSEQ = 13220 OR MAPSEQ = 13267) ORDER BY `GONGUSEQ`;"
+          sqlQuery = `SELECT * FROM RentalToolList WHERE (${gonguNames}) AND (DETAILADDR LIKE '%강북구%' OR  (MAPSEQ >= 36 AND MAPSEQ <= 48) OR (MAPSEQ >= 194 AND MAPSEQ <= 202) OR MAPSEQ = 13034 OR (MAPSEQ >= 13215 AND MAPSEQ <= 13216) OR MAPSEQ = 13220 OR MAPSEQ = 13267) ORDER BY \`GONGUSEQ\``;
           break;
         case '강서구' :
-          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%강서구%' OR  (MAPSEQ >= 49 AND MAPSEQ <= 52) OR (MAPSEQ >= 2412 AND MAPSEQ <= 2436) OR MAPSEQ = 13219) ORDER BY `GONGUSEQ`;"
+          sqlQuery = `SELECT * FROM RentalToolList WHERE (${gonguNames}) AND (DETAILADDR LIKE '%강서구%' OR  (MAPSEQ >= 49 AND MAPSEQ <= 52) OR (MAPSEQ >= 2412 AND MAPSEQ <= 2436) OR MAPSEQ = 13219) ORDER BY \`GONGUSEQ\``;
           break;
         case '강동구' :
-          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%강동구%' OR  ((GONGUSEQ >= 1 AND GONGUSEQ <= 35) OR (GONGUSEQ >= 115 AND GONGUSEQ <= 116) OR (GONGUSEQ >= 143 AND GONGUSEQ <= 144) OR GONGUSEQ = 148 OR GONGUSEQ = 151 OR GONGUSEQ = 153 OR GONGUSEQ = 156)) ORDER BY `GONGUSEQ`;"
+          sqlQuery = `SELECT * FROM RentalToolList WHERE (${gonguNames}) AND (DETAILADDR LIKE '%강동구%' OR  ((GONGUSEQ >= 1 AND GONGUSEQ <= 35) OR (GONGUSEQ >= 115 AND GONGUSEQ <= 116) OR (GONGUSEQ >= 143 AND GONGUSEQ <= 144) OR GONGUSEQ = 148 OR GONGUSEQ = 151 OR GONGUSEQ = 153 OR GONGUSEQ = 156)) ORDER BY \`GONGUSEQ\``;
           break;
         case '관악구' :
-          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%관악구%' OR  (MAPSEQ >= 53 AND MAPSEQ <= 74) OR (MAPSEQ >= 203 AND MAPSEQ <= 223)) ORDER BY `GONGUSEQ`;"
+          sqlQuery = `SELECT * FROM RentalToolList WHERE (${gonguNames}) AND (DETAILADDR LIKE '%관악구%' OR  (MAPSEQ >= 53 AND MAPSEQ <= 74) OR (MAPSEQ >= 203 AND MAPSEQ <= 223)) ORDER BY \`GONGUSEQ\``;
           break;
         case '광진구' :
-          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%광진구%' OR  (MAPSEQ >= 75 AND MAPSEQ <= 89) OR MAPSEQ = 13175 OR MAPSEQ = 13198) ORDER BY `GONGUSEQ`;"
+          sqlQuery = `SELECT * FROM RentalToolList WHERE (${gonguNames}) AND (DETAILADDR LIKE '%광진구%' OR  (MAPSEQ >= 75 AND MAPSEQ <= 89) OR MAPSEQ = 13175 OR MAPSEQ = 13198) ORDER BY \`GONGUSEQ\``;
           break;
         case '구로구' :
-          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%구로구%' OR  (MAPSEQ >= 90 AND MAPSEQ <= 103) OR (MAPSEQ >= 224 AND MAPSEQ <= 226) OR MAPSEQ = 13035) ORDER BY `GONGUSEQ`;"
+          sqlQuery = `SELECT * FROM RentalToolList WHERE (${gonguNames}) AND (DETAILADDR LIKE '%구로구%' OR  (MAPSEQ >= 90 AND MAPSEQ <= 103) OR (MAPSEQ >= 224 AND MAPSEQ <= 226) OR MAPSEQ = 13035) ORDER BY \`GONGUSEQ\``;
           break;
         case '금천구' :
-          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%금천구%' OR  (MAPSEQ >= 104 AND MAPSEQ <= 114) OR MAPSEQ = 227 OR (MAPSEQ >= 13162 AND MAPSEQ <= 13166) OR (MAPSEQ >= 13213)) ORDER BY `GONGUSEQ`;"
+          sqlQuery = `SELECT * FROM RentalToolList WHERE (${gonguNames}) AND (DETAILADDR LIKE '%금천구%' OR  (MAPSEQ >= 104 AND MAPSEQ <= 114) OR MAPSEQ = 227 OR (MAPSEQ >= 13162 AND MAPSEQ <= 13166) OR (MAPSEQ >= 13213)) ORDER BY \`GONGUSEQ\``;
           break;
         case '노원구' :
-          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%노원구%' OR  (MAPSEQ >= 117 AND MAPSEQ <= 129) OR MAPSEQ = 13169 OR MAPSEQ = 13197 OR MAPSEQ = 13214) ORDER BY `GONGUSEQ`;"
+          sqlQuery = `SELECT * FROM RentalToolList WHERE (${gonguNames}) AND (DETAILADDR LIKE '%노원구%' OR  (MAPSEQ >= 117 AND MAPSEQ <= 129) OR MAPSEQ = 13169 OR MAPSEQ = 13197 OR MAPSEQ = 13214) ORDER BY \`GONGUSEQ\``;
           break;
         case '도봉구' :
-          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%도봉구%' OR  (MAPSEQ >= 130 AND MAPSEQ <= 142) OR MAPSEQ = 228 OR MAPSEQ = 13222 OR MAPSEQ = 13276) ORDER BY `GONGUSEQ`;"
+          sqlQuery = `SELECT * FROM RentalToolList WHERE (${gonguNames}) AND (DETAILADDR LIKE '%도봉구%' OR  (MAPSEQ >= 130 AND MAPSEQ <= 142) OR MAPSEQ = 228 OR MAPSEQ = 13222 OR MAPSEQ = 13276) ORDER BY \`GONGUSEQ\``;
           break;
         case '동대문구' :
-          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%동대문구%' OR  (MAPSEQ >= 145 AND MAPSEQ <= 147) OR (MAPSEQ >= 149 AND MAPSEQ <= 150) OR MAPSEQ = 152 OR (MAPSEQ >= 154 AND MAPSEQ <= 155) OR (MAPSEQ >= 157 AND MAPSEQ <= 162) OR (MAPSEQ >= 229 AND MAPSEQ <= 232) OR (MAPSEQ >= 13036 AND MAPSEQ <= 13039)) ORDER BY `GONGUSEQ`;"
+          sqlQuery = `SELECT * FROM RentalToolList WHERE (${gonguNames}) AND  (DETAILADDR LIKE '%동대문구%' OR  (MAPSEQ >= 145 AND MAPSEQ <= 147) OR (MAPSEQ >= 149 AND MAPSEQ <= 150) OR MAPSEQ = 152 OR (MAPSEQ >= 154 AND MAPSEQ <= 155) OR (MAPSEQ >= 157 AND MAPSEQ <= 162) OR (MAPSEQ >= 229 AND MAPSEQ <= 232) OR (MAPSEQ >= 13036 AND MAPSEQ <= 13039)) ORDER BY \`GONGUSEQ\``;
           break;
         case '동작구' :
-          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%동작구%' OR  (MAPSEQ >= 163 AND MAPSEQ <= 174) OR MAPSEQ = 9766 OR (MAPSEQ >= 13066 AND MAPSEQ <= 13068) OR (MAPSEQ >= 13170 AND MAPSEQ <= 13174)) ORDER BY `GONGUSEQ`;"
+          sqlQuery = `SELECT * FROM RentalToolList WHERE (${gonguNames}) AND (DETAILADDR LIKE '%동작구%' OR  (MAPSEQ >= 163 AND MAPSEQ <= 174) OR MAPSEQ = 9766 OR (MAPSEQ >= 13066 AND MAPSEQ <= 13068) OR (MAPSEQ >= 13170 AND MAPSEQ <= 13174)) ORDER BY \`GONGUSEQ\``;
           break;
         case '마포구' :
-          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%마포구%' OR  (MAPSEQ >= 175 AND MAPSEQ <= 188) OR (MAPSEQ >= 13053 AND MAPSEQ <= 13054)) ORDER BY `GONGUSEQ`;"
+          sqlQuery = `SELECT * FROM RentalToolList WHERE (${gonguNames}) AND (DETAILADDR LIKE '%마포구%' OR  (MAPSEQ >= 175 AND MAPSEQ <= 188) OR (MAPSEQ >= 13053 AND MAPSEQ <= 13054)) ORDER BY \`GONGUSEQ\``;
           break;
         case '서대문구' :
-          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%서대문구%' OR  (MAPSEQ >= 189 AND MAPSEQ <= 193) OR (MAPSEQ >= 233 AND MAPSEQ <= 235) OR (MAPSEQ >= 13055 AND MAPSEQ <=13063) ORDER BY `GONGUSEQ`"
+          sqlQuery = `SELECT * FROM RentalToolList WHERE (${gonguNames}) AND  (DETAILADDR LIKE '%서대문구%' OR  (MAPSEQ >= 189 AND MAPSEQ <= 193) OR (MAPSEQ >= 233 AND MAPSEQ <= 235) OR (MAPSEQ >= 13055 AND MAPSEQ <=13063) ORDER BY \`GONGUSEQ\``;
           break;
         case '서초구' :
-          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%서초구%' OR  (GONGUSEQ BETWEEN 236 AND 243 OR GONGUSEQ BETWEEN 13046 AND 13052 OR GONGUSEQ BETWEEN 13172 AND 13195 OR GONGUSEQ = 13221)) ORDER BY `GONGUSEQ`;"
+          sqlQuery = `SELECT * FROM RentalToolList WHERE (${gonguNames}) AND (DETAILADDR LIKE '%서초구%' OR  (GONGUSEQ BETWEEN 236 AND 243 OR GONGUSEQ BETWEEN 13046 AND 13052 OR GONGUSEQ BETWEEN 13172 AND 13195 OR GONGUSEQ = 13221)) ORDER BY \`GONGUSEQ\``;
           break;
         case '성동구' :
-          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%성동구%' OR  GONGUSEQ BETWEEN 244 AND 25) ORDER BY `GONGUSEQ`"
+          sqlQuery = `SELECT * FROM RentalToolList WHERE (${gonguNames}) AND (DETAILADDR LIKE '%성동구%' OR  GONGUSEQ BETWEEN 244 AND 25) ORDER BY \`GONGUSEQ\``;
           break;
         case '성북구' :
-          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%성북구%' OR  (GONGUSEQ BETWEEN 254 AND 263 OR GONGUSEQ = 13040 OR GONGUSEQ BETWEEN 13167 AND 13168 OR GONGUSEQ BETWEEN 13228 AND 13246 OR GONGUSEQ = 13251)) ORDER BY `GONGUSEQ`;"
+          sqlQuery = `SELECT * FROM RentalToolList WHERE (${gonguNames}) AND (DETAILADDR LIKE '%성북구%' OR  (GONGUSEQ BETWEEN 254 AND 263 OR GONGUSEQ = 13040 OR GONGUSEQ BETWEEN 13167 AND 13168 OR GONGUSEQ BETWEEN 13228 AND 13246 OR GONGUSEQ = 13251)) ORDER BY \`GONGUSEQ\``;
           break;
         case '송파구' :
-          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%송파구%' OR  (GONGUSEQ BETWEEN 264 AND 321 OR GONGUSEQ = 13033 OR GONGUSEQ = 13227)) ORDER BY `GONGUSEQ`;"
+          sqlQuery = `SELECT * FROM RentalToolList WHERE (${gonguNames}) AND (DETAILADDR LIKE '%송파구%' OR  (GONGUSEQ BETWEEN 264 AND 321 OR GONGUSEQ = 13033 OR GONGUSEQ = 13227)) ORDER BY \`GONGUSEQ\``;
           break;
         case '양천구' :
-          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%양천구%' OR  (GONGUSEQ BETWEEN 322 AND 331 OR GONGUSEQ = 13041 OR GONGUSEQ = 13204)) ORDER BY `GONGUSEQ`;"
+          sqlQuery = `SELECT * FROM RentalToolList WHERE (${gonguNames}) AND  (DETAILADDR LIKE '%양천구%' OR  (GONGUSEQ BETWEEN 322 AND 331 OR GONGUSEQ = 13041 OR GONGUSEQ = 13204)) ORDER BY \`GONGUSEQ\``;
           break;
         case '영등포구' :
-          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%영등포구%' OR  (GONGUSEQ BETWEEN 332 AND 367 OR GONGUSEQ = 13176 OR GONGUSEQ = 13224 OR GONGUSEQ = 13263)) ORDER BY `GONGUSEQ`;"
+          sqlQuery = `SELECT * FROM RentalToolList WHERE (${gonguNames}) AND (DETAILADDR LIKE '%영등포구%' OR  (GONGUSEQ BETWEEN 332 AND 367 OR GONGUSEQ = 13176 OR GONGUSEQ = 13224 OR GONGUSEQ = 13263)) ORDER BY \`GONGUSEQ\``;
           break;
         case '용산구' :
-          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%용산구%' OR  GONGUSEQ BETWEEN 368 AND 452 OR GONGUSEQ = 13250) ORDER BY `GONGUSEQ`;"
+          sqlQuery = `SELECT * FROM RentalToolList WHERE (${gonguNames}) AND  (DETAILADDR LIKE '%용산구%' OR  GONGUSEQ BETWEEN 368 AND 452 OR GONGUSEQ = 13250) ORDER BY \`GONGUSEQ\``;
           break;
         case '은평구' :
-          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%은평구%' OR  (GONGUSEQ BETWEEN 453 AND 469 OR GONGUSEQ = 13042 OR GONGUSEQ = 13171 OR GONGUSEQ = 13266)) ORDER BY `GONGUSEQ`;"
+          sqlQuery = `SELECT * FROM RentalToolList WHERE (${gonguNames}) AND  (DETAILADDR LIKE '%은평구%' OR  (GONGUSEQ BETWEEN 453 AND 469 OR GONGUSEQ = 13042 OR GONGUSEQ = 13171 OR GONGUSEQ = 13266)) ORDER BY \`GONGUSEQ\``;
           break;
         case '종로구' :
-          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%종로구%' OR  GONGUSEQ BETWEEN 470 AND 487) ORDER BY `GONGUSEQ`;"
+          sqlQuery = `SELECT * FROM RentalToolList WHERE (${gonguNames}) AND (DETAILADDR LIKE '%종로구%' OR  GONGUSEQ BETWEEN 470 AND 487) ORDER BY \`GONGUSEQ\``;
           break;
         case '중구' :
-          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%중구%' OR  GONGUSEQ BETWEEN 488 AND 507) ORDER BY `GONGUSEQ`;"
+          sqlQuery = `SELECT * FROM RentalToolList WHERE (${gonguNames}) AND  (DETAILADDR LIKE '%중구%' OR  GONGUSEQ BETWEEN 488 AND 507) ORDER BY \`GONGUSEQ\``;
           break;
         case '중랑구' :
-          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%중랑구%' OR  (GONGUSEQ BETWEEN 508 AND 510 OR GONGUSEQ BETWEEN 2437 AND 2438 OR GONGUSEQ BETWEEN 13043 AND 13045 OR GONGUSEQ BETWEEN 13200 AND 13202 OR GONGUSEQ BETWEEN 13205 AND 13029 OR GONGUSEQ = 13223)) ORDER BY `GONGUSEQ`;"
+          sqlQuery = `SELECT * FROM RentalToolList WHERE (${gonguNames}) AND (DETAILADDR LIKE '%중랑구%' OR  (GONGUSEQ BETWEEN 508 AND 510 OR GONGUSEQ BETWEEN 2437 AND 2438 OR GONGUSEQ BETWEEN 13043 AND 13045 OR GONGUSEQ BETWEEN 13200 AND 13202 OR GONGUSEQ BETWEEN 13205 AND 13029 OR GONGUSEQ = 13223)) ORDER BY \`GONGUSEQ\``;
           break;
         case '강남구' :
-          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%강남구%' OR (GONGUSEQ BETWEEN 13005 AND 13026)) ORDER BY `GONGUSEQ`;"
+          sqlQuery = `SELECT * FROM RentalToolList WHERE (${gonguNames}) AND (DETAILADDR LIKE '%강남구%' OR (GONGUSEQ BETWEEN 13005 AND 13026)) ORDER BY \`GONGUSEQ\``;
           break;
         case '인천광역시 강화군' :
-          sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND (DETAILADDR LIKE '%인천광역시 강화군%' OR GONGUSEQ = 13064) ORDER BY `GONGUSEQ`;"
+          sqlQuery = `SELECT * FROM RentalToolList WHERE (${gonguNames}) AND (DETAILADDR LIKE '%인천광역시 강화군%' OR GONGUSEQ = 13064) ORDER BY \`GONGUSEQ\``;
           break;
       }
     
@@ -599,13 +600,13 @@ app.post("/api/getspecificdata", (req, res) => {
                 sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND MAINGONGUCODE = ? AND (DETAILADDR LIKE '%마포구%' OR  (MAPSEQ >= 175 AND MAPSEQ <= 188) OR (MAPSEQ >= 13053 AND MAPSEQ <= 13054)) ORDER BY `GONGUSEQ`;"
                 break;
               case '서대문구' :
-                sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND MAINGONGUCODE = ? AND (DETAILADDR LIKE '%서대문구%' OR  (MAPSEQ >= 189 AND MAPSEQ <= 193) OR (MAPSEQ >= 233 AND MAPSEQ <= 235) OR (MAPSEQ >= 13055 AND MAPSEQ <=13063) ORDER BY `GONGUSEQ`"
+                sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND MAINGONGUCODE = ? AND (DETAILADDR LIKE '%서대문구%' OR  (MAPSEQ >= 189 AND MAPSEQ <= 193) OR (MAPSEQ >= 233 AND MAPSEQ <= 235) OR (MAPSEQ >= 13055 AND MAPSEQ <=13063) ORDER BY `GONGUSEQ`;"
                 break;
               case '서초구' :
                 sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND MAINGONGUCODE = ? AND (DETAILADDR LIKE '%서초구%' OR  (GONGUSEQ BETWEEN 236 AND 243 OR GONGUSEQ BETWEEN 13046 AND 13052 OR GONGUSEQ BETWEEN 13172 AND 13195 OR GONGUSEQ = 13221)) ORDER BY `GONGUSEQ`;"
                 break;
               case '성동구' :
-                sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND MAINGONGUCODE = ? AND (DETAILADDR LIKE '%성동구%' OR  GONGUSEQ BETWEEN 244 AND 25) ORDER BY `GONGUSEQ`"
+                sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND MAINGONGUCODE = ? AND (DETAILADDR LIKE '%성동구%' OR  GONGUSEQ BETWEEN 244 AND 25) ORDER BY `GONGUSEQ`;"
                 break;
               case '성북구' :
                 sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND MAINGONGUCODE = ? AND (DETAILADDR LIKE '%성북구%' OR  (GONGUSEQ BETWEEN 254 AND 263 OR GONGUSEQ = 13040 OR GONGUSEQ BETWEEN 13167 AND 13168 OR GONGUSEQ BETWEEN 13228 AND 13246 OR GONGUSEQ = 13251)) ORDER BY `GONGUSEQ`;"
@@ -693,13 +694,13 @@ app.post("/api/getspecificdata", (req, res) => {
                 sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND MAINGONGUCODE = ? AND SUBGONGUCODE = ? AND (DETAILADDR LIKE '%마포구%' OR  (MAPSEQ >= 175 AND MAPSEQ <= 188) OR (MAPSEQ >= 13053 AND MAPSEQ <= 13054)) ORDER BY `GONGUSEQ`;"
                 break;
               case '서대문구' :
-                sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND MAINGONGUCODE = ? AND SUBGONGUCODE = ? AND (DETAILADDR LIKE '%서대문구%' OR  (MAPSEQ >= 189 AND MAPSEQ <= 193) OR (MAPSEQ >= 233 AND MAPSEQ <= 235) OR (MAPSEQ >= 13055 AND MAPSEQ <=13063) ORDER BY `GONGUSEQ`"
+                sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND MAINGONGUCODE = ? AND SUBGONGUCODE = ? AND (DETAILADDR LIKE '%서대문구%' OR  (MAPSEQ >= 189 AND MAPSEQ <= 193) OR (MAPSEQ >= 233 AND MAPSEQ <= 235) OR (MAPSEQ >= 13055 AND MAPSEQ <=13063) ORDER BY `GONGUSEQ`;"
                 break;
               case '서초구' :
                 sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND MAINGONGUCODE = ? AND SUBGONGUCODE = ? AND (DETAILADDR LIKE '%서초구%' OR  (GONGUSEQ BETWEEN 236 AND 243 OR GONGUSEQ BETWEEN 13046 AND 13052 OR GONGUSEQ BETWEEN 13172 AND 13195 OR GONGUSEQ = 13221)) ORDER BY `GONGUSEQ`;"
                 break;
               case '성동구' :
-                sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND MAINGONGUCODE = ? AND SUBGONGUCODE = ? AND (DETAILADDR LIKE '%성동구%' OR  GONGUSEQ BETWEEN 244 AND 253) ORDER BY `GONGUSEQ`"
+                sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND MAINGONGUCODE = ? AND SUBGONGUCODE = ? AND (DETAILADDR LIKE '%성동구%' OR  GONGUSEQ BETWEEN 244 AND 253) ORDER BY `GONGUSEQ`;"
                 break;
               case '성북구' :
                 sqlQuery = "SELECT * FROM RentalToolList WHERE GONGUNAME LIKE '" + makeListForMysql.join("' OR GONGUNAME LIKE '") + "' AND MAINGONGUCODE = ? AND SUBGONGUCODE = ? AND (DETAILADDR LIKE '%성북구%' OR  (GONGUSEQ BETWEEN 254 AND 263 OR GONGUSEQ = 13040 OR GONGUSEQ BETWEEN 13167 AND 13168 OR GONGUSEQ BETWEEN 13228 AND 13246 OR GONGUSEQ = 13251)) ORDER BY `GONGUSEQ`;"
